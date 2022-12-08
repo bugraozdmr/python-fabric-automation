@@ -1,0 +1,86 @@
+#nesne yönelik programlama
+import random
+class yönetici():
+    def __init__(self,isim,soyisim,yas,maas,görevi):
+        self.isim = isim
+        self.soyisim = soyisim
+        self.yas = yas
+        self.maas = maas
+        self.görevi = görevi
+    def zamyap(self,b=0):
+        c = int(self.maas)
+        c += b
+        return c
+def giris():
+    gecis = 0
+    while gecis != 1:
+        kadı = input("kullanıcı adı :")
+        if (kadı == "kali"):
+            sifre = input("sifre :")
+            if (sifre == "root"):
+                print("giriş başarılı .")
+                gecis = 1
+            else:
+                print("şifre yanlış..")
+        else:
+            print("kullanıcı adı hatalı..")
+#arayüz oluşturmaya başlıyoruz
+print("Fabrika Otomasyon\n\n")
+giris()
+obj = []
+name = []
+surname = []
+age = []
+salary = []
+mission = []
+no = []
+i = 0
+print("\n1.Yeni eleman ekle\n2.Eleman çıkart\n3.Zam yap\n4.Eleman Listesi\n5.Çıkış")
+while True:
+    deger = int(input("seçim :"))
+    match deger:
+        case 1:
+            isim = input("Isim :")
+            name.append(isim)
+            soyisim =input("Soyisim :")
+            surname.append(soyisim)
+            yas = input("Yas :")
+            age.append(yas)
+            maas = input("Maas :")
+            salary.append(maas)
+            görevi = input("Görevi :")
+            mission.append(görevi)
+            obj.append(yönetici(name[i],surname[i],age[i],salary[i],mission[i]))
+            noo = random.randint(1,100)
+            no.append(noo)
+            i += 1
+        case 2:
+            index = int(input("Kaç numaralı eleman silinecek :"))
+            try:
+                obj.pop(index)
+                name.pop(index)
+                surname.pop(index)
+                age.pop(index)
+                salary.pop(index)
+                mission.pop(index)
+            except:
+                print("Böyle bir index mevcut değil !!")
+        case 3:
+            zam = int(input("ne kadar zam yapılacak :"))
+            a = int(input("kaç numaralı elemana zam yapılacak :"))
+            try:
+                print("{} isimli elemanın yeni maaşı {} TL.".format(name[a],obj[a].zamyap(zam)))
+                salary[a] = obj[a].zamyap(zam)
+            except:
+                print("hata !")
+        case 4:
+            for l in range(i):
+                try:
+                    print("---",l,".---\n","AD : {}\nSOYAD : {}\nYAS : {}\nMAAS : {}\nGOREV : {} \nno = {}".format(name[l],surname[l],age[l],salary[l],mission[l],no[l]),end="\n--------\n",sep="")
+                except:
+                    print("",end="")
+        case 5:
+            exit(1)
+        case _:
+            print("Geçersiz seçim !")
+            continue
